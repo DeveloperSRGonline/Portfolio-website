@@ -1,0 +1,37 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+html,body{
+    height: 100%;
+    width: 100%;
+    background-color: #222;
+    color: #fff;
+    /* background: url(https://img.freepik.com/free-psd/3d-illustration-female-graphic-designer-character-working-tablet_23-2149501791.jpg?t=st=1763049605~exp=1763053205~hmac=23556b92a1e9902d4f35caaef944299ef460329f625890024e39463f2e58b7b5&w=1480);
+    background-size: cover;
+    background-position: bottom; */
+    overflow-x: hidden;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+body::selection{
+  color: greenyellow;
+}
+:root{
+  /* background color */
+  --bg-primary-color:#222;
+  --bg-secondary-color:#333;
+  --bg-tertiary-color:#444;
+  --bg-quaternary-color:#555;
+
+  /* text colors */
+  --text-primary-color:#fff;
+  --text-secondary-color:#ccc;
+
+  /* spacing */
+  --space-sm:2px;
+  --space-md:4px;
+  --space-lg:8px;
+  --space-xl:16px;
+  --space-2xl:32px;
+}

@@ -1,0 +1,64 @@
+.home {
+  width: 100vw;
+  height: 100vh;
+  background-color: #222;
+  display: flex;
+  justify-content: flex-start;
+  padding: 6vw 8vw;
+  align-items: flex-start;
+
+  .hero {
+    position:absolute;
+    z-index: 10;
+    font-size: 3rem;
+    // background-color: red;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    .top-hero {
+        line-height: normal;
+      h3 {
+        font-size: 1.6rem;
+        // background-color: green;
+      }
+      h1 {
+        font-size: 10rem;
+      }
+
+      h2 {
+        font-size: 4rem;
+      }
+    }
+    .bottom-hero {
+      font-size: 1.5rem;
+      background-color: greenyellow;
+      color: #000;
+      width: fit-content;
+      padding: 1rem 3rem;
+      border-radius: 50px;
+      font-weight: 700;
+    }
+  }
+  .hero::after{
+    content:"";
+    background: linear-gradient(to bottom ,white,greenyellow);
+    border-radius: 50%;
+    filter: blur(50px);
+    opacity: 0.2;
+    width: 30vw;
+    height: 30vw;
+    position: absolute;
+    z-index: 1;
+  }
+ 
+}
+.about {
+  width: 100vw;
+  height: 100vh;
+  background-color: #555;
+}
+.skills {
+  width: 100vw;
+  height: 100vh;
+  background-color: #666;
+}
