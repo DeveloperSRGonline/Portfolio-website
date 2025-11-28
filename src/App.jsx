@@ -1,17 +1,12 @@
-import Navbar from "./Components/Navbar/Navbar";
-import About from "./pages/allPages/About";
-import Home from "./pages/allPages/Home";
-import Skills from "./pages/allPages/Skills";
+import Navbar from '#components/Navbar'
+import React from 'react'
 
 const App = () => {
   return (
-    <div>
-      <Navbar />
-      <Home />
-      <About />
-      <Skills />
-    </div>
-  );
-};
+    <main>
+      <Navbar/>
+    </main>
+  )
+}
 
-export default App;
+export default App
