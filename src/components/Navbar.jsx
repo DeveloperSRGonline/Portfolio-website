@@ -1,8 +1,18 @@
 import { navIcons, navLinks } from '#constants'
 import dayjs from 'dayjs'
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 
 const Navbar = () => {
+  const [time, setTime] = useState(dayjs())
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setTime(dayjs())
+    }, 1000 * 60)
+
+    return () => clearInterval(interval)
+  }, [])
+
   return (
     <nav>
       {/* left side */}
@@ -22,7 +32,7 @@ const Navbar = () => {
       {/* right side */}
       <div>
         <ul>
-          {navIcons.map(({id,img}) => (
+          {navIcons.map(({ id, img }) => (
             <li key={id}>
               <img src={img} className='icon-hover' alt={`icon-${id}`} />
             </li>
@@ -30,11 +40,11 @@ const Navbar = () => {
         </ul>
 
         <time>
-          {dayjs().format('ddd MMM D h:mm A')}
+          {time.format('ddd MMM D h:mm A')}
         </time>
       </div>
     </nav>
   )
 }
 
-export default Navbar 
+export default Navbar
