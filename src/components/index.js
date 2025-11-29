@@ -1,5 +1,5 @@
-import Navbar from '#components/Navbar'
-import Welcome from '#components/Welcome'
+import Navbar from './Navbar'
+import Welcome from './Welcome'
 
 
-export {Navbar,Welcome};
+export { Navbar, Welcome };

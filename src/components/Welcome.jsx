@@ -14,7 +14,7 @@ const renderText = (text, className, baseWeight = 400) => {
 }
 
 const setupTextHover = (Container, type) => {
-    if (!Container) return;
+    if (!Container) return () => {};
 
     const letters = Container.querySelectorAll('span');
 
@@ -68,7 +68,7 @@ const Welcome = () => {
             <h1 className='mt-7' ref={titleRef}>{renderText('Portfolio', 'text-8xl italic font-georama')}</h1>
 
             <div className='small-screen'>
-                <p>This Portfolio is designed for desktop/tablets</p>
+                <p>This Portfolio is designed for desktop/tablet</p>
             </div>
         </section>
     )
