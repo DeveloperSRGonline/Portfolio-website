@@ -6,6 +6,9 @@ import Terminal from '#windows/Terminal'
 import Safari from '#windows/Safari'
 import Resume from '#windows/Resume'
 import Finder from '#windows/Finder'
+import Txt from '#windows/Txt'
+import Img from '#windows/Img'
+import { Contacts } from '#windows'
 
 
 gsap.registerPlugin(Draggable)
@@ -21,6 +24,9 @@ const App = () => {
       <Safari />
       <Resume />
       <Finder />
+      <Txt />
+      <Img />
+      <Contacts />
     </main>
   )
 }

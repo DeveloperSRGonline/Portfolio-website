@@ -2,11 +2,16 @@ import Terminal from "../windows/Terminal";
 import Safari from "../windows/Safari";
 import Resume from "../windows/Resume";
 import Finder from "./Finder";
+import Txt from './Txt'
+import Img from './Img'
+import Contacts from './Contacts'
 
-
-export default {
+export {
     Terminal,
     Safari,
     Resume,
-    Finder
+    Finder,
+    Txt,
+    Img,
+    Contacts
 }
