@@ -1,1 +1,12 @@
 HOC - which another component as an input and return a modified component
+
+weather the useLocationStore is needed instead of useWindowStore 
+the reasion to use useLocationStore - it store and manages content state the hierarchical  navigation within the finder  
+it handles no what folder am i currently in  
+and the useWindowStore is used to manage opening , closing , zindex , position , and animation state;(it controls applications life cycle and visual layering on desktop)
+it finds it this location is opened or on the top
+these are fundamental two different domains 
+these two concern shouldn't be tightly toufuled
+another reason to seperate them the location context such which  property we clicked on need to percist accross window operation as we close the finder we has to be on last location we are on 
+the location store will be used by the other component in the future 
+for example you might wanna pin any folder in home screen and finally it great for scalability also 
