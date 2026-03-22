@@ -57,4 +57,4 @@ const Photos = () => {
     );
 };
 
-export default WindowWrapper(Photos, "photos");
+export default WindowWrapper(Photos, "photos"); 
