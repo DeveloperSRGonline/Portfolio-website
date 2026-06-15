@@ -266,30 +266,16 @@ body {
         }
 
         .gallery {
-            @apply p-5 flex-1;
+            @apply p-6 flex-1 overflow-y-auto;
 
             ul {
-                @apply grid grid-cols-5 grid-rows-5 gap-2.5 h-full;
+                @apply columns-2 gap-6 space-y-0;
 
                 li {
+                    @apply break-inside-avoid mb-6 cursor-pointer transition-transform hover:scale-105;
+
                     img {
-                        @apply size-full object-cover rounded-lg;
-                    }
-
-                    &:first-child {
-                        @apply row-start-1 row-span-3 col-start-1 col-span-3;
-                    }
-
-                    &:nth-child(2) {
-                        @apply row-start-1 row-span-3 col-start-4 col-span-2;
-                    }
-
-                    &:nth-child(3) {
-                        @apply row-start-4 row-span-2 col-start-3 col-span-3;
-                    }
-
-                    &:last-child {
-                        @apply row-start-4 row-span-2 col-start-1 col-span-2;
+                        @apply w-full rounded-lg object-contain shadow-md;
                     }
                 }
             }
