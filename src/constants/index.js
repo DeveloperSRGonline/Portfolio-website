@@ -9,11 +9,11 @@ const navLinks = [
     name: "Contact",
     type: "contact",
   },
-  {
-    id: 4,
-    name: "Resume",
-    type: "resume",
-  },
+  // {
+  //   id: 4,
+  //   name: "Resume",
+  //   type: "resume",
+  // },
 ];
 
 const navIcons = [
@@ -114,15 +114,15 @@ const techStack = [
   },
   {
     category: "Backend",
-    items: ["Node.js", "Express", "NestJS", "Hono"],
+    items: ["Node.js", "Express","Appwrite"],
   },
   {
     category: "Database",
-    items: ["MongoDB", "PostgreSQL"],
+    items: ["MongoDB"],
   },
   {
     category: "Dev Tools",
-    items: ["Git", "GitHub", "Docker"],
+    items: ["Git", "GitHub","vs code", "postman"],
   },
 ];
 
@@ -131,29 +131,29 @@ const socials = [
     id: 1,
     text: "Github",
     icon: "/icons/github.svg",
-    bg: "#f4656b",
-    link: "https://github.com/JavaScript-Mastery-Pro",
+    bg: "#333333",
+    link: "https://github.com/DeveloperSRGonline",
   },
   {
     id: 2,
-    text: "Platform",
-    icon: "/icons/atom.svg",
-    bg: "#4bcb63",
-    link: "https://jsmastery.com/",
+    text: "Instagram",
+    icon: "/icons/insta.svg",
+    bg: "#f4656b",
+    link: "https://www.instagram.com/developer_shivam.g",
   },
   {
     id: 3,
     text: "Twitter/X",
     icon: "/icons/twitter.svg",
-    bg: "#ff866b",
-    link: "https://x.com/jsmasterypro",
+    bg: "#000000",
+    link: "https://x.com/srgwebsquare",
   },
   {
     id: 4,
     text: "LinkedIn",
     icon: "/icons/linkedin.svg",
-    bg: "#05b6f6",
-    link: "https://www.linkedin.com/company/javascriptmastery/posts/?feedView=all",
+    bg: "#0077b5",
+    link: "https://www.linkedin.com/in/shivam-garade",
   },
 ];
 
@@ -188,19 +188,59 @@ const photosLinks = [
 const gallery = [
   {
     id: 1,
-    img: "/images/gal1.png",
+    img: "/images/1.jpeg",
   },
   {
     id: 2,
-    img: "/images/gal2.png",
+    img: "/images/2.jpeg",
   },
   {
     id: 3,
-    img: "/images/gal3.png",
+    img: "/images/3.jpeg",
   },
   {
     id: 4,
-    img: "/images/gal4.png",
+    img: "/images/4.jpeg",
+  },
+  {
+    id: 5,
+    img: "/images/5.jpeg",
+  },
+  {
+    id: 6,
+    img: "/images/6.jpeg",
+  },
+  {
+    id: 7,
+    img: "/images/7.jpeg",
+  },
+  {
+    id: 8,
+    img: "/images/8.jpeg",
+  },
+  {
+    id: 9,
+    img: "/images/9.jpeg",
+  },
+  {
+    id: 10,
+    img: "/images/10.jpeg",
+  },
+  {
+    id: 11,
+    img: "/images/11.jpeg",
+  },
+  {
+    id: 12,
+    img: "/images/12.jpeg",
+  },
+  {
+    id: 13,
+    img: "/images/13.jpeg",
+  },
+  {
+    id: 14,
+    img: "/images/14.jpeg",
   },
 ];
 
