@@ -24,12 +24,12 @@ const Home = () => {
   return (
     <section id="home">
       <ul>
-        {projects.map((project) => (
+        {/* {projects.map((project) => (
           <li className={clsx('group folder',project.windowPosition)} key={project.id}>
             <img src="/images/folder.png" alt={project.name} onClick={() => handleOpenWindow(project)}/>
             <p>{project.name}</p>
           </li>
-        ))}
+        ))} */}
       </ul>
     </section>
   )
