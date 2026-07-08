@@ -58,12 +58,12 @@ src/
   - Animate skill bars, project cards, and section headings on scroll
   - Staggered entrance animations for list items and cards
 
-- [ ] **Custom Cursor**
+- [x] **Custom Cursor**
   - Replace the default cursor with a styled dot + ring cursor effect
   - Add magnetic hover effects on buttons and links
   - Scale/morph the cursor when hovering interactive elements
 
-- [ ] **Page Transitions**
+- [x] **Page Transitions**
   - Smooth fade/slide transitions between window/page views using `framer-motion` or CSS transitions
   - Loading skeleton screens for async data fetching
 

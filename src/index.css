@@ -639,3 +639,27 @@ body {
         }
     }
 }
+
+/* ── Custom Cursor Support ── */
+@media (pointer: fine) {
+    .custom-cursor-active,
+    .custom-cursor-active * {
+        cursor: none !important;
+    }
+}
+
+/* ── Page Transitions (Fade-in / Slide-up) ── */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-fade-in-up {
+    animation: fadeInUp 0.28s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}

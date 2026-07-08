@@ -53,7 +53,7 @@ const Finder = () => {
         </div>
 
         {activeLocation?.type === 'work' ? (
-          <div className="github-content">
+          <div className="github-content animate-fade-in-up" key={activeLocation?.id}>
             <div className="repos-header">
               <Github className="size-4 text-gray-700" />
               <h2>GitHub Projects</h2>
@@ -95,7 +95,7 @@ const Finder = () => {
             )}
           </div>
         ) : (
-          <ul className='content'>
+          <ul className='content animate-fade-in-up' key={activeLocation?.id}>
             {activeLocation?.children?.map((item) => (
               <li key={item.id} className={item.position} onClick={() => openItem(item)}>
                 <img src={item.icon} alt={item.name} />

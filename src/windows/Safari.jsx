@@ -953,7 +953,7 @@ const Safari = () => {
       </div>
 
       {/* 3. Render page body */}
-      <div className="safari-body flex-1 overflow-y-auto">
+      <div className="safari-body flex-1 overflow-y-auto animate-fade-in-up" key={activeTab.url}>
         {renderPage(activeTab.url)}
       </div>
     </div>
