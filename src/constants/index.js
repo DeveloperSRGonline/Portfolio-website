@@ -554,11 +554,4 @@ export const safariBookmarks = [
   { id: 6, name: "Resume", icon: "/images/pdf.png", action: "resume", color: "#FF9500" },
 ];
 
-export const safariSearchableItems = [
-  { title: "Projects — Portfolio", description: "View all my work and projects", action: "finder", keywords: ["project", "work", "portfolio", "finder"] },
-  { title: "Skills — Tech Stack", description: "React, Next.js, Node.js and more", action: "terminal", keywords: ["skill", "tech", "stack", "react", "javascript"] },
-  { title: "Contact — Get in Touch", description: "Email, socials, and DMs", action: "contact", keywords: ["contact", "email", "social", "linkedin"] },
-  { title: "Resume — Download PDF", description: "View or download my resume", action: "resume", keywords: ["resume", "cv", "pdf", "download"] },
-  { title: "Gallery — Photo Album", description: "Browse my photography", action: "photos", keywords: ["photo", "gallery", "image", "picture"] },
-];
 

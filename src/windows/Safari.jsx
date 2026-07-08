@@ -1,9 +1,9 @@
 import { WindowControls } from '#components'
-import { blogPosts, locations, safariBookmarks, safariSearchableItems } from '#constants';
+import { blogPosts, locations, safariBookmarks } from '#constants';
 import WindowWrapper from '#hoc/WindowWrapper';
 import useWindowStore from '#store/window';
 import useLocationStore from '#store/location';
-import { ChevronLeft, ChevronRight, Share, Plus, Copy, Search, ShieldHalf, RefreshCw, Lock, ArrowRight, ExternalLink, PanelLeft, FileText, Video, Sparkles, AlertCircle } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Share, Plus, Copy, Search, ShieldHalf, RefreshCw, Lock, ArrowRight, ExternalLink, PanelLeft, FileText, Video, Sparkles, AlertCircle, ShieldAlert } from 'lucide-react';
 import React, { useState, useEffect, useRef } from 'react'
 
 const BLOG_CONTENTS = {
@@ -53,19 +53,29 @@ const getYoutubeEmbedUrl = (url) => {
   return videoId ? `https://www.youtube.com/embed/${videoId}` : "";
 };
 
+const isExternalUrl = (url) => {
+  return url.startsWith("http://") || url.startsWith("https://");
+};
+
 const resolveUrl = (url) => {
   if (!url) return "start://";
-  const lowercase = url.toLowerCase().trim();
-  if (lowercase === "start://" || lowercase === "safari://start") return "start://";
-  if (lowercase === "blog://list") return "blog://list";
+  const trimmed = url.trim();
+  const lowercase = trimmed.toLowerCase();
   
-  if (lowercase.includes("fzdtyswuzju") || lowercase.includes("nike.com") || lowercase.includes("nike")) {
+  if (lowercase.startsWith("start://") || 
+      lowercase.startsWith("blog://") || 
+      lowercase.startsWith("project://")) {
+    return trimmed;
+  }
+
+  // Intercept portfolio specific links
+  if (lowercase.includes("fzdtyswuzju") || lowercase.includes("nike.com") || lowercase === "nike") {
     return "project://5";
   }
-  if (lowercase.includes("iyoz165wgkq") || lowercase.includes("ai-resume-analyzer.com") || lowercase.includes("ai-resume-analyzer") || lowercase.includes("analyzer")) {
+  if (lowercase.includes("iyoz165wgkq") || lowercase.includes("ai-resume-analyzer.com") || lowercase === "analyzer" || lowercase === "ai-resume") {
     return "project://6";
   }
-  if (lowercase.includes("lkrx390fjmw") || lowercase.includes("food-delivery-app.com") || lowercase.includes("food-delivery") || lowercase.includes("food")) {
+  if (lowercase.includes("lkrx390fjmw") || lowercase.includes("food-delivery-app.com") || lowercase === "food-delivery") {
     return "project://7";
   }
 
@@ -79,27 +89,18 @@ const resolveUrl = (url) => {
     return "blog://3";
   }
 
-  if (lowercase === "finder" || lowercase === "projects" || lowercase === "portfolio") {
-    return "search://?q=projects";
-  }
-  if (lowercase === "skills" || lowercase === "tech" || lowercase === "terminal") {
-    return "search://?q=skills";
-  }
-  if (lowercase === "contact" || lowercase === "email") {
-    return "search://?q=contact";
-  }
-  if (lowercase === "resume" || lowercase === "cv" || lowercase === "pdf") {
-    return "search://?q=resume";
-  }
-  if (lowercase === "gallery" || lowercase === "photos") {
-    return "search://?q=gallery";
+  // Real URL mapping
+  if (trimmed.startsWith("http://") || trimmed.startsWith("https://")) {
+    return trimmed;
   }
 
-  if (url.startsWith("http://") || url.startsWith("https://") || url.includes(".")) {
-    return url;
+  // Has a TLD dot and no spaces
+  if (trimmed.includes(".") && !trimmed.includes(" ")) {
+    return `https://${trimmed}`;
   }
 
-  return `search://?q=${encodeURIComponent(url)}`;
+  // Fallback to Google Search
+  return `https://www.google.com/search?igu=1&q=${encodeURIComponent(trimmed)}`;
 };
 
 const getTitleForUrl = (url) => {
@@ -115,9 +116,17 @@ const getTitleForUrl = (url) => {
     const project = locations.work?.children?.find(p => p.id === id);
     return project ? project.name : "Project Info";
   }
-  if (url.startsWith("search://")) {
-    const query = decodeURIComponent(url.split("?q=")[1] || "");
-    return `Search: ${query}`;
+  if (isExternalUrl(url)) {
+    try {
+      const urlObj = new URL(url);
+      if (urlObj.hostname.includes("google.com") && urlObj.pathname.includes("search")) {
+        const query = urlObj.searchParams.get("q");
+        return query ? `Search: ${query}` : "Google";
+      }
+      return urlObj.hostname.replace("www.", "");
+    } catch (e) {
+      return "Web Page";
+    }
   }
   return url;
 };
@@ -130,7 +139,7 @@ const StartPage = ({ onNavigate }) => {
 
   const handleFavoriteClick = (fav) => {
     if (fav.url) {
-      window.open(fav.url, '_blank');
+      onNavigate(fav.url);
     } else if (fav.action) {
       openWindow(fav.action);
     }
@@ -294,73 +303,91 @@ const ProjectPage = ({ projectId, onNavigate }) => {
   );
 };
 
-const SearchPage = ({ query, onNavigate }) => {
-  const { openWindow } = useWindowStore();
-  const decodedQuery = decodeURIComponent(query || "").toLowerCase().trim();
-
-  const results = safariSearchableItems.filter((item) => {
-    return (
-      item.title.toLowerCase().includes(decodedQuery) ||
-      item.description.toLowerCase().includes(decodedQuery) ||
-      item.keywords.some((kw) => kw.includes(decodedQuery))
-    );
-  });
-
-  const handleResultClick = (res) => {
-    if (res.action) {
-      openWindow(res.action);
-    }
-  };
-
+const LoadingOverlay = ({ url }) => {
+  let domain = "Page";
+  try {
+    domain = new URL(url).hostname.replace("www.", "");
+  } catch (e) {}
   return (
-    <div className="search-results">
-      <p className="search-header">
-        Search results for "{decodedQuery}" • {results.length} results found
-      </p>
-      {results.length > 0 ? (
-        <div className="space-y-4">
-          {results.map((res, index) => (
-            <div key={index} className="search-result border border-gray-100 rounded-xl" onClick={() => handleResultClick(res)}>
-              <h4>{res.title}</h4>
-              <p className="text-gray-500 mt-1">{res.description}</p>
-              <div className="text-[10px] text-blue-600 mt-2 flex items-center gap-1 font-medium">
-                Open Portfolio Application <ArrowRight className="size-3" />
-              </div>
-            </div>
-          ))}
-        </div>
-      ) : (
-        <div className="text-center py-10 space-y-3">
-          <AlertCircle className="size-8 mx-auto text-gray-300" />
-          <p className="text-sm font-medium text-gray-500">No results found in portfolio for "{decodedQuery}".</p>
-          <p className="text-xs text-gray-400">Try searching: "projects", "skills", "resume", "contact", or "gallery".</p>
-        </div>
-      )}
+    <div className="safari-loading">
+      <div className="safari-spinner" />
+      <p>Connecting to {domain}...</p>
     </div>
   );
 };
 
-const ExternalLinkPage = ({ url, onNavigate }) => {
+const BlockedSitePage = ({ url, onNavigate }) => {
+  let domain = url;
+  try {
+    domain = new URL(url).hostname;
+  } catch (e) {}
+
   return (
-    <div className="max-w-md mx-auto p-10 mt-10 border border-gray-100 rounded-2xl bg-gray-50/50 text-center space-y-5">
-      <div className="size-14 bg-blue-100 rounded-full flex items-center justify-center mx-auto text-blue-600">
-        <ExternalLink className="size-6" />
+    <div className="safari-blocked">
+      <div className="size-14 bg-red-100 rounded-full flex items-center justify-center mx-auto text-red-600">
+        <ShieldAlert className="size-6" />
       </div>
       <div className="space-y-2">
-        <h3 className="text-base font-bold text-gray-800">External Website</h3>
-        <p className="text-xs text-gray-500 break-all">{url}</p>
+        <h3 className="text-base font-bold text-gray-800">Connection Restricted</h3>
+        <p className="text-xs text-gray-400 break-all">{url}</p>
       </div>
-      <p className="text-xs text-gray-600 leading-relaxed">
-        Safari cannot frame embedding this site directly because of its security configuration (X-Frame-Options / CSP).
+      <p className="text-xs text-gray-500 leading-relaxed">
+        Safari cannot embed <strong>{domain}</strong> inside an iframe due to the website's security policy (X-Frame-Options or Content-Security-Policy).
       </p>
       <div className="flex flex-col gap-2 pt-2">
-        <a href={url} target="_blank" rel="noopener noreferrer" className="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2.5 rounded-lg text-xs block w-full">
+        <a href={url} target="_blank" rel="noopener noreferrer" className="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 rounded-lg text-xs block w-full text-center">
           Open in New Browser Tab
         </a>
-        <button onClick={() => onNavigate("start://")} className="text-xs text-gray-500 hover:underline">
+        <button onClick={() => onNavigate("start://")} className="text-xs text-gray-400 hover:text-gray-600 hover:underline">
           Go back to Start Page
         </button>
       </div>
+    </div>
+  );
+};
+
+const IframePage = ({ url, reloadKey, onNavigate }) => {
+  const [isLoading, setIsLoading] = useState(true);
+  const [isBlocked, setIsBlocked] = useState(false);
+  const timeoutRef = useRef(null);
+
+  useEffect(() => {
+    setIsLoading(true);
+    setIsBlocked(false);
+
+    // Timeout: if page hasn't completed loading in 8s, assume iframe embedding is blocked
+    timeoutRef.current = setTimeout(() => {
+      setIsLoading(false);
+      setIsBlocked(true);
+    }, 8000);
+
+    return () => {
+      if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    };
+  }, [url, reloadKey]);
+
+  const handleLoad = () => {
+    if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    setIsLoading(false);
+    setIsBlocked(false);
+  };
+
+  if (isBlocked) {
+    return <BlockedSitePage url={url} onNavigate={onNavigate} />;
+  }
+
+  return (
+    <div className="relative w-full h-full">
+      {isLoading && <LoadingOverlay url={url} />}
+      <iframe
+        key={`${url}-${reloadKey}`}
+        src={url}
+        onLoad={handleLoad}
+        className="safari-iframe w-full h-full border-0"
+        sandbox="allow-same-origin allow-scripts allow-popups allow-forms allow-popups-to-escape-sandbox"
+        referrerPolicy="no-referrer"
+        title="Safari Browser Window"
+      />
     </div>
   );
 };
@@ -376,6 +403,7 @@ const Safari = () => {
     { id: 'initial', title: "Start Page", url: "start://", history: ["start://"], historyIndex: 0 }
   ]);
   const [activeTabId, setActiveTabId] = useState('initial');
+  const [reloadKey, setReloadKey] = useState(0);
 
   const activeTab = tabs.find(t => t.id === activeTabId) || tabs[0];
   const [inputVal, setInputVal] = useState(activeTab.url);
@@ -489,7 +517,11 @@ const Safari = () => {
   };
 
   const handleReload = () => {
-    navigate(activeTab.url, activeTab.title);
+    if (isExternalUrl(activeTab.url)) {
+      setReloadKey(prev => prev + 1);
+    } else {
+      navigate(activeTab.url, activeTab.title);
+    }
   };
 
   const handleCopyUrl = () => {
@@ -502,9 +534,9 @@ const Safari = () => {
     if (url.startsWith("blog://list"))       return <BlogListPage onNavigate={navigate} />;
     if (url.startsWith("blog://"))           return <ReaderPage postId={parseInt(url.split("blog://")[1] || "1")} onNavigate={navigate} />;
     if (url.startsWith("project://"))        return <ProjectPage projectId={parseInt(url.split("project://")[1] || "5")} onNavigate={navigate} />;
-    if (url.startsWith("search://"))         return <SearchPage query={url.split("?q=")[1] || ""} onNavigate={navigate} />;
     
-    return <ExternalLinkPage url={url} onNavigate={navigate} />;
+    // Real URLs (and Fallback) -> Render IframePage
+    return <IframePage url={url} reloadKey={reloadKey} onNavigate={navigate} />;
   };
 
   return (
