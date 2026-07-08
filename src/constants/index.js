@@ -544,3 +544,21 @@ const WINDOW_CONFIG = {
 };
 
 export { INITIAL_Z_INDEX, WINDOW_CONFIG };
+
+export const safariBookmarks = [
+  { id: 1, name: "GitHub", icon: "/icons/github.svg", url: "https://github.com/DeveloperSRGonline", color: "#333" },
+  { id: 2, name: "LinkedIn", icon: "/icons/linkedin.svg", url: "https://www.linkedin.com/in/shivam-garade", color: "#0077b5" },
+  { id: 3, name: "Projects", icon: "/images/finder.png", action: "finder", color: "#4A90D9" },
+  { id: 4, name: "Skills", icon: "/images/terminal.png", action: "terminal", color: "#1DB954" },
+  { id: 5, name: "Contact", icon: "/images/contact.png", action: "contact", color: "#FF6B6B" },
+  { id: 6, name: "Resume", icon: "/images/pdf.png", action: "resume", color: "#FF9500" },
+];
+
+export const safariSearchableItems = [
+  { title: "Projects — Portfolio", description: "View all my work and projects", action: "finder", keywords: ["project", "work", "portfolio", "finder"] },
+  { title: "Skills — Tech Stack", description: "React, Next.js, Node.js and more", action: "terminal", keywords: ["skill", "tech", "stack", "react", "javascript"] },
+  { title: "Contact — Get in Touch", description: "Email, socials, and DMs", action: "contact", keywords: ["contact", "email", "social", "linkedin"] },
+  { title: "Resume — Download PDF", description: "View or download my resume", action: "resume", keywords: ["resume", "cv", "pdf", "download"] },
+  { title: "Gallery — Photo Album", description: "Browse my photography", action: "photos", keywords: ["photo", "gallery", "image", "picture"] },
+];
+
