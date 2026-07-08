@@ -4,5 +4,7 @@ import Home from './Home'
 
 import Dock from './dock'
 import WindowControls from './WindowControls'
+import RepoCard from './RepoCard'
 
-export { Navbar, Welcome, Dock, WindowControls, Home };
+export { Navbar, Welcome, Dock, WindowControls, Home, RepoCard };
+

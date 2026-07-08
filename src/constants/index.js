@@ -546,12 +546,14 @@ const WINDOW_CONFIG = {
 export { INITIAL_Z_INDEX, WINDOW_CONFIG };
 
 export const safariBookmarks = [
-  { id: 1, name: "GitHub", icon: "/icons/github.svg", url: "https://github.com/DeveloperSRGonline", color: "#333" },
-  { id: 2, name: "LinkedIn", icon: "/icons/linkedin.svg", url: "https://www.linkedin.com/in/shivam-garade", color: "#0077b5" },
-  { id: 3, name: "Projects", icon: "/images/finder.png", action: "finder", color: "#4A90D9" },
-  { id: 4, name: "Skills", icon: "/images/terminal.png", action: "terminal", color: "#1DB954" },
-  { id: 5, name: "Contact", icon: "/images/contact.png", action: "contact", color: "#FF6B6B" },
-  { id: 6, name: "Resume", icon: "/images/pdf.png", action: "resume", color: "#FF9500" },
+  { id: 1, name: "Google", url: "https://www.google.com", letter: "G", color: "#4285F4" },
+  { id: 2, name: "YouTube", url: "https://www.youtube.com", letter: "Y", color: "#FF0000" },
+  { id: 3, name: "Wikipedia", url: "https://www.wikipedia.org", letter: "W", color: "#000000" },
+  { id: 4, name: "GitHub", url: "https://github.com", icon: "/icons/github.svg", color: "#333" },
+  { id: 5, name: "LinkedIn", url: "https://www.linkedin.com", icon: "/icons/linkedin.svg", color: "#0077b5" },
+  { id: 6, name: "Apple", url: "https://www.apple.com", letter: "A", color: "#555555" },
+  { id: 7, name: "Yahoo", url: "https://www.yahoo.com", letter: "Y", color: "#6001d2" },
+  { id: 8, name: "Reddit", url: "https://www.reddit.com", letter: "R", color: "#FF4500" },
 ];
 
 
