@@ -28,8 +28,8 @@ const TechStackView = () => (
         <div className="footnote">
             <p><Check size={20}/>{techStack.length} of {techStack.length} stacks loaded successfully (100%)</p>
 
-            <p className="text-black">
-                <Flag size={15} fill="black"/>
+            <p className="text-black dark:text-gray-300">
+                <Flag size={15} fill="black" className="dark:fill-gray-300"/>
                 Render time: 4ms
             </p>
         </div>

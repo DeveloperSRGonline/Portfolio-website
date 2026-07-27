@@ -18,7 +18,7 @@ const Photos = () => {
                 </div>
             </div>
 
-            <div className="bg-white flex w-full h-full">
+            <div className="bg-white dark:bg-[#1c1c1e] flex w-full h-full">
                 <div className="sidebar">
                     <h2>Photos</h2>
                     <ul>

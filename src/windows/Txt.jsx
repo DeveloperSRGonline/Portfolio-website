@@ -12,14 +12,14 @@ const Txt = () => {
     const { name, image, subtitle, description } = data
 
     return (
-        <div className="flex flex-col h-full bg-white">
-            <div id="window-header" className="flex items-center justify-between px-4 py-3 border-b border-gray-200 bg-[#fbfbfb]">
+        <div className="flex flex-col h-full bg-white dark:bg-[#1c1c1e]">
+            <div id="window-header" className="flex items-center justify-between px-4 py-3 border-b border-gray-200 dark:border-gray-700 bg-[#fbfbfb] dark:bg-[#2c2c2e]">
                 <WindowControls target="txtfile" />
-                <h2 className="text-sm font-medium text-gray-500">{name}</h2>
+                <h2 className="text-sm font-medium text-gray-500 dark:text-gray-400">{name}</h2>
                 <div className="w-14"></div>
             </div>
 
-            <div className="flex-1 overflow-y-auto p-8 md:p-12 font-serif bg-white">
+            <div className="flex-1 overflow-y-auto p-8 md:p-12 font-serif bg-white dark:bg-[#1c1c1e]">
                 <div className="max-w-2xl mx-auto">
                     {image && (
                         <div className="flex justify-center mb-8">
@@ -32,12 +32,12 @@ const Txt = () => {
                     )}
 
                     {subtitle && (
-                        <h1 className="text-2xl md:text-3xl font-bold text-center text-gray-900 mb-8 font-sans">
+                        <h1 className="text-2xl md:text-3xl font-bold text-center text-gray-900 dark:text-gray-100 mb-8 font-sans">
                             {subtitle}
                         </h1>
                     )}
 
-                    <div className="space-y-4 text-lg leading-relaxed text-gray-700">
+                    <div className="space-y-4 text-lg leading-relaxed text-gray-700 dark:text-gray-300">
                         {description && description.map((paragraph, index) => (
                             <p key={index}>{paragraph}</p>
                         ))}
